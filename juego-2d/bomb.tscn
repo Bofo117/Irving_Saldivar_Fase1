@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://ubn0dud38tpf"]
+
+[ext_resource type="Texture2D" uid="uid://blvm4mtdf2id4" path="res://art/explosion/explosion_fase_1-removebg-preview.png" id="1_apr5j"]
+[ext_resource type="Texture2D" uid="uid://drnkawsl6wiqy" path="res://art/explosion/bomba_stated_1-removebg-preview.png" id="1_nfxiy"]
+[ext_resource type="Script" uid="uid://binxle0eevwp6" path="res://bomb.gd" id="1_ugjkb"]
+[ext_resource type="Texture2D" uid="uid://l3xh7par6ks8" path="res://art/explosion/bomba_stated_2-removebg-preview.png" id="2_6w74q"]
+[ext_resource type="Texture2D" uid="uid://cuc5781usxfj4" path="res://art/explosion/explosion_fase_2-removebg-preview.png" id="2_ugjkb"]
+[ext_resource type="Texture2D" uid="uid://wjglg4fwy27r" path="res://art/explosion/bomba_stated_3-removebg-preview.png" id="3_bwkwj"]
+[ext_resource type="Texture2D" uid="uid://cwne2cl1virt2" path="res://art/explosion/explosion_fase_3-removebg-preview.png" id="3_r0wls"]
+[ext_resource type="Texture2D" uid="uid://ejisflr8knao" path="res://art/explosion/explosion_fase_4-removebg-preview.png" id="4_a3tha"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fy0rd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_apr5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ugjkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r0wls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a3tha")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.5,
+"texture": ExtResource("1_nfxiy")
+}, {
+"duration": 5.5,
+"texture": ExtResource("2_6w74q")
+}, {
+"duration": 5.5,
+"texture": ExtResource("3_bwkwj")
+}],
+"loop": true,
+"name": &"tick",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_apr5j"]
+radius = 11.0
+
+[node name="Bomb" type="Area2D" unique_id=1860259907 groups=["mobs"]]
+priority = 1
+script = ExtResource("1_ugjkb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1283822820]
+position = Vector2(-5.9604645e-08, 1.1920929e-07)
+scale = Vector2(0.138, 0.138)
+sprite_frames = SubResource("SpriteFrames_fy0rd")
+animation = &"tick"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1274799948]
+shape = SubResource("CapsuleShape2D_apr5j")
+
+[node name="Timer" type="Timer" parent="." unique_id=1891700312]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

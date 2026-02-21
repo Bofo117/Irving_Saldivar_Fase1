@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://b70ctw1qefdtc"]
+
+[ext_resource type="Script" uid="uid://b2t7bv56rg115" path="res://mob.gd" id="1_1qmh0"]
+[ext_resource type="Texture2D" uid="uid://b5scfpumi7mno" path="res://art/enemigo/enemy_pose_1_v2-.png" id="2_s5nov"]
+[ext_resource type="Texture2D" uid="uid://bwpdul66mlm4p" path="res://art/enemigo/enemy_pose_2_v2-.png" id="3_1qmh0"]
+[ext_resource type="Texture2D" uid="uid://due7idycl4rt3" path="res://art/enemigo/enemy_pose_2-removebg-preview.png" id="3_b3mxk"]
+[ext_resource type="Texture2D" uid="uid://cws1m1jwxhp5j" path="res://art/enemigo/enemy_pose_3_v2-.png" id="4_gfurk"]
+[ext_resource type="Texture2D" uid="uid://c38d1hgsi1ac4" path="res://art/enemigo/enemy_pose_1-removebg-preview.png" id="5_gfurk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubaqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s5nov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1qmh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gfurk")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_gfurk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b3mxk")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b3mxk"]
+radius = 29.0
+height = 88.0
+
+[node name="Mob" type="RigidBody2D" unique_id=917097317 groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_1qmh0")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1392084141 groups=["mobs"]]
+scale = Vector2(0.155, 0.155)
+sprite_frames = SubResource("SpriteFrames_ubaqv")
+animation = &"walk"
+frame_progress = 0.3432757
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=113430380]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_b3mxk")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1974050055]
